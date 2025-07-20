@@ -222,9 +222,7 @@ class PopUpWindowBase(QWidget, Ui_PopUpWindow):
         if event.buttons() == Qt.LeftButton:
             deltaX = event.globalPosition().x() - self.dragStartPosition.x()
             maxX = self.screenGeometry.width() - self.width() - 13
-            newX = maxX + deltaX
-            if newX < maxX:
-                newX = maxX
+            newX = max(maxX, maxX + deltaX)
             self.move(newX, self.y())
 
         if hasattr(self, "closeTimer"):
